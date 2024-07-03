@@ -1,0 +1,40 @@
+.tabContainItem_2 {
+  background: rgb(0 0 0 / 8%);
+  padding: 20px;
+  border-radius: 10px;
+}
+.DT_icon {
+  padding: 0 6px 6px 6px;
+  font-size: 20px;
+  border-radius: 6px;
+  transition: all 360ms ease;
+}
+.DT_icon:hover {
+  color: #000dff;
+  background: #3333335e;
+}
+.DT_icon:hover:last-child {
+  color: #ff0000;
+}
+.D_DT_topContain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+.D_DT_sortBy {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.D_DT_sortBy .form-label {
+  margin-bottom: 0rem !important;
+  color: #ffffff;
+}
+.D_DT_topContain .form-control {
+  border: none;
+  outline: none;
+  box-shadow: none !important;
+}

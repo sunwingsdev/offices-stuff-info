@@ -1,0 +1,133 @@
+.headerTopMenu {
+  margin: 30px 0 20px;
+}
+.headerTopMenu {
+  display: flex;
+  column-gap: 40px;
+}
+.headerRightText,
+.headerLeftImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background: #4169e1;
+  border: 3px solid #ffffff;
+  border-radius: 6px;
+}
+.headerLeftImg img {
+  max-width: 460px;
+  margin: auto;
+}
+.headerRightText {
+  font-size: 40px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.headerMarquee {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: auto;
+  color: #ffffff;
+  background: #1e293b;
+  border-radius: 8px;
+}
+.marqueeTitle {
+  padding: 0 16px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #ffffff;
+}
+.marqueeSize,
+.marqueeTitle h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.marqueeTitle span {
+  width: 10px;
+  height: 30px;
+  border-right: 1.4px solid #fff;
+}
+.marqueeText {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .headerTopMenu {
+    column-gap: 40px;
+  }
+  .headerLeftImg img {
+    max-width: 360px;
+  }
+}
+@media (max-width: 991px) {
+  .headerLeftImg img {
+    max-width: 300px;
+  }
+  .headerRightText {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .marqueeTitle {
+    padding: 0 8px;
+    gap: 4px;
+  }
+  .marqueeSize,
+  .marqueeTitle h2 {
+    font-size: 18px;
+  }
+  .marqueeTitle span {
+    width: 6px;
+    height: 26px;
+  }
+  .headerMarquee {
+    padding: 10px;
+    gap: 0px;
+    border-radius: 4px;
+  }
+  .marqueeText {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+@media (max-width: 767px) {
+  .headerLeftImg img {
+    max-width: 240px;
+  }
+  .marqueeText {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .headerTopMenu {
+    column-gap: 20px;
+  }
+}
+@media (max-width: 576px) {
+  .headerTopMenu {
+    margin: 30px 0 14px;
+  }
+  .headerTopMenu {
+    column-gap: 40px;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+  .marqueeSize,
+  .marqueeTitle h2 {
+    font-size: 16px;
+  }
+  .marqueeTitle span {
+    height: 24px;
+  }
+  .marqueeTitle {
+    padding: 0 6px 0 0;
+    gap: 2px;
+  }
+}
+@media (max-width: 450px) {
+}

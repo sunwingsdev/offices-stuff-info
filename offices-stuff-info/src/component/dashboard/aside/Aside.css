@@ -1,0 +1,134 @@
+.aside-container {
+  position: relative;
+}
+
+.mobile-menu-toggle {
+  display: none; /* Hide by default on desktop */
+}
+
+.aside {
+  min-width: 16%;
+  height: 93%;
+  padding: 40px 20px;
+  color: #ffffff;
+  background: royalblue;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dashboardLogoImg,
+.dashboardLogoImg img {
+  margin: auto;
+  max-width: 150px;
+}
+
+.DBText {
+  font-size: 20px;
+  padding-bottom: 2px !important;
+  margin: 20px 0 16px 0 !important;
+}
+
+.dashboardMenu {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.dashboardMenu li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px 8px 16px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 10px;
+  transition: all 360ms ease;
+}
+
+.dashboardMenu li.active,
+.dashboardMenu li:hover {
+  color: #000000;
+  background: #ffdf6e;
+}
+
+.bSubMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.dashboardSubMenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.dashboardSubMenu.expanded {
+  max-height: 200px; /* Adjust according to the content */
+}
+
+.rotate-icon {
+  transition: transform 0.3s ease-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 1600px) {
+  .aside {
+    min-width: 18%;
+  }
+}
+@media (max-width: 1400px) {
+  .aside {
+    min-width: 20%;
+  }
+}
+@media (max-width: 1200px) {
+  .aside {
+    min-width: 22%;
+  }
+}
+@media (max-width: 1100px) {
+  .aside {
+    min-width: 24%;
+  }
+}
+@media (max-width: 991px) {
+  .mobile-menu-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    z-index: 1100;
+    cursor: pointer;
+  }
+
+  .aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1000;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .aside.mobile-menu-visible {
+    transform: translateX(0);
+  }
+
+  .DBText,
+  .dashboardLogoImg {
+    display: none;
+  }
+}

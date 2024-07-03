@@ -1,0 +1,275 @@
+.tabsArea {
+  padding: 20px 0;
+}
+.tabsMenuItemBox {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
+.tabsMenuItemBox .tabsBox_1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 8px;
+  border-radius: 0 !important;
+  color: #000000;
+  background: #ffffff;
+  border-right: 2px solid #3e3e3e;
+  transition: all 360ms ease;
+  white-space: nowrap;
+}
+.tabsMenuItemBox .tabsBox_1:last-child {
+  border-right: 0;
+}
+.tabsMenuItemBox .tabsBox_1:hover {
+  color: #ffffff;
+  background: #232323;
+}
+.tabsMenuItemBox .tabsBox_1 .tabsIcon {
+  font-size: 20px;
+}
+.tabContain {
+  margin: 20px 0;
+}
+.tabContainItem {
+  padding: 40px;
+  background: linear-gradient(180deg, #ffdf6e 0%, #f2295b 100%);
+  border-radius: 10px;
+  border: 2px solid #212121;
+}
+.tabContainItem h2 {
+  padding: 10px !important;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background: #000000;
+  border-radius: 10px;
+  text-shadow: 0px 0px 10px rgba(255, 63, 114.99999999999993, 0.99);
+}
+.tabMaster {
+  max-width: 440px;
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 2px solid #005bec;
+  border-radius: 10px;
+}
+.tabMaster h3,
+.tabMaster span {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000000;
+}
+.whatsAppIcon {
+  font-size: 40px;
+}
+.tabNumber {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000000;
+  padding: 4px;
+  text-decoration: none;
+}
+.tabsingletext {
+  margin-top: 20px !important;
+  padding: 30px 30px 60px 30px !important;
+  color: #ffffff;
+  background: rgb(50 65 84 / 79%);
+  border-radius: 10px;
+}
+.tabsingletext p {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 800;
+}
+.tabContainItemImg {
+  padding: 80px 120px 120px;
+  background: url(../../assets/ld2-1-1.jpg) no-repeat scroll center center /
+    cover;
+  border: 4px solid #fff;
+  border-radius: 10px;
+}
+.tabMarqueText {
+  font-size: 50px;
+  font-weight: 800;
+  color: #fff;
+}
+.tabMarqueText p {
+  max-width: 700px;
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 800;
+  text-shadow: 0px 0px 10px
+    rgba(230.17998962402345, 12.509782044783886, 12.509782044783886, 0.89);
+}
+.facebookBtn {
+  max-width: 300px;
+  margin: 30px 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 24px;
+  font-weight: 800;
+  padding: 10px;
+  color: #ffffff;
+  background: #12366f;
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+}
+
+.tabContain_2 {
+  max-width: 96%;
+  margin: 20px auto !important;
+}
+.tabContainItem_2 h2 {
+  padding: 8px !important;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background: #1e293b;
+}
+.tabContainItem_2 form {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 0;
+  font-weight: 600;
+  border: none !important;
+  box-shadow: none !important;
+}
+.tabContainItem_2 form label {
+  font-size: 20px;
+}
+.tabContainItem_2 form input {
+  padding: 6px 8px;
+}
+.tabContainItem_2 form .input:focus {
+  box-shadow: none !important;
+  border: none !important;
+}
+.tableThBox th {
+  padding: 14px 10px !important;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff !important;
+  background: #516aa2 !important;
+  white-space: nowrap;
+}
+.tabContainItem_2 .table > tbody {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.whatsAppIcon_2 {
+  color: #1bd741;
+}
+
+@media (max-width: 991px) {
+  .tabContainItem h2 {
+    font-size: 26px;
+  }
+  .tabMarqueText p,
+  .tabsingletext p {
+    font-size: 20px;
+    line-height: 34px;
+  }
+  .facebookBtn {
+    font-size: 22px;
+  }
+  .tabContainItemImg {
+    padding: 60px 40px;
+  }
+  .tabsMenuItemBox .tabsBox_1 .tabsIcon {
+    font-size: 16px;
+  }
+  .tabsMenuItemBox .tabsBox_1 {
+    gap: 4px;
+    font-size: 16px;
+    padding: 12px 6px;
+  }
+  .tabContainItem {
+    padding: 28px;
+    border-radius: 8px;
+    border: 2px solid #212121;
+  }
+}
+@media (max-width: 767px) {
+  .tabContainItem h2 {
+    font-size: 24px;
+  }
+  .tabMaster h3,
+  .tabMaster span,
+  .tabsingletext p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .tabMarqueText p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  .tabsMenuItemBox .tabsBox_1 {
+    width: auto;
+    gap: 6px;
+    font-size: 18px;
+    padding: 10px 14px;
+  }
+  .tabNumber {
+    font-size: 18px;
+  }
+  .tabsingletext {
+    padding: 24px 22px 40px 24px !important;
+  }
+  .tableThBox th {
+    padding: 12px 16px !important;
+    font-size: 18px;
+  }
+}
+@media (max-width: 567px) {
+  .tabContainItem h2 {
+    font-size: 22px;
+    line-height: 34px;
+  }
+  .tabContainItemImg {
+    padding: 40px 28px;
+  }
+  .tableThBox th {
+    padding: 12px 16px !important;
+    font-size: 16px;
+  }
+  .whatsAppIcon {
+    font-size: 30px;
+  }
+  .tabContainItem_2 .table > :not(caption) > * > * {
+    padding: 0.2rem 0.5rem !important;
+  }
+  .tabContainItem {
+    padding: 32px 18px;
+  }
+}
+@media (max-width: 450px) {
+  .tabMaster {
+    gap: 5px;
+  }
+  .tabMaster h3,
+  .tabMaster span,
+  .tabsingletext p {
+    font-size: 14px;
+  }
+  .tabNumber {
+    font-size: 14px;
+  }
+  .whatsAppIcon {
+    font-size: 26px;
+  }
+}

@@ -1,0 +1,76 @@
+/* LogoCard.css */
+
+.image-card {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.image-buttons {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+}
+
+.delete-button {
+  border-radius: 50%;
+  padding: 2px; /* Increased padding */
+  font-size: 10px; /* Increased font size */
+  position: absolute;
+  top: -15px;
+  right: -15px; /* Adjusted position */
+  z-index: 1;
+  background-color: transparent;
+  color: #fa011a;
+  border: 2px solid #fa011a; /* Added border */
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
+}
+
+.delete-button:hover {
+  color: #7e000d;
+  border: 2px solid #7e000d;
+}
+
+.checkbox-label {
+  position: relative;
+  display: inline-block;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 30px; /* Increase width */
+  height: 30px; /* Increase height */
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 30px; /* Height matches checkbox height */
+  width: 30px; /* Width matches checkbox width */
+  background-color: #fff;
+  border: 2px solid #6c757d; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark:after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 12px;
+  width: 10px;
+  height: 5px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.image-buttons input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}

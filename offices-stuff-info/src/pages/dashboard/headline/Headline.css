@@ -1,0 +1,29 @@
+.marqueeContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.editButton {
+  color: white;
+}
+.editButton:hover {
+  color: blue;
+}
+
+.headlineAreaInput {
+  padding: 50px;
+  width: 80%;
+  background: #a7a7a74f;
+  border-radius: 20px;
+}
+.headlineAreaInput .form-control {
+  outline: none;
+  border: none;
+  box-shadow: none !important;
+}
+.headlineAreaInput label {
+  font-size: 16px;
+  font-weight: 600;
+}
