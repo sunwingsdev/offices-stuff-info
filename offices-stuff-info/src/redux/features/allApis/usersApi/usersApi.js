@@ -26,6 +26,12 @@ const usersApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+
+    // get a single user
+    getSingleUser: builder.query({
+      query: (uid) => `/users/${uid}`,
+      providesTags: ["users"],
+    }),
   }),
 });
 
@@ -33,4 +39,5 @@ export const {
   useAddUserMutation,
   useGetAllUsersQuery,
   useDeleteAUserMutation,
+  useGetSingleUserQuery,
 } = usersApi;
