@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Table, Form, Pagination } from "react-bootstrap";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "./DataTable.css";
+import { FiPhoneIncoming, FiPhoneOutgoing } from "react-icons/fi";
 import { useGetAllDataQuery } from "../../../redux/features/allApis/dataApi/dataApi";
 import Loader from "../../../component/shared/Loader";
-import { FiPhoneIncoming, FiPhoneOutgoing } from "react-icons/fi";
+import { AuthContext } from "../../../providers/AuthProvider";
 
-const DataTable = () => {
+const MyDataTable = () => {
+  const { user, loading } = useContext(AuthContext);
   const { data, isLoading, isError } = useGetAllDataQuery();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("latest"); // State to track sorting order
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10); // You can change this number for more or fewer rows per page
+
+  const myData = data?.filter(
+    (singleData) => singleData.consultantUid === user?.uid
+  );
 
   // Function to handle search input change
   const handleSearchChange = (e) => {
@@ -22,7 +27,10 @@ const DataTable = () => {
   // Function to check if object contains search term in any field
   const doesObjectContainSearchTerm = (obj, term) => {
     for (let key in obj) {
-      if (obj[key] && obj[key].toString().toLowerCase().includes(term.toLowerCase())) {
+      if (
+        obj[key] &&
+        obj[key].toString().toLowerCase().includes(term.toLowerCase())
+      ) {
         return true;
       }
     }
@@ -39,7 +47,7 @@ const DataTable = () => {
   };
 
   // Render loading state if data is still fetching
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loader />;
   }
 
@@ -51,8 +59,8 @@ const DataTable = () => {
   // Filter and sort the data based on search term and sorting criteria
   let filteredData = [];
 
-  if (data) {
-    filteredData = [...data];
+  if (myData) {
+    filteredData = [...myData];
 
     if (searchTerm.trim() !== "") {
       filteredData = filteredData.filter((item) =>
@@ -177,17 +185,28 @@ const DataTable = () => {
             </Table>
             <div className="pagination-container">
               <Pagination>
-                <Pagination.Prev onClick={handlePrevious} disabled={currentPage === 1} />
-                {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => (
-                  <Pagination.Item
-                    key={index + 1}
-                    active={index + 1 === currentPage}
-                    onClick={() => paginate(index + 1)}
-                  >
-                    {index + 1}
-                  </Pagination.Item>
-                ))}
-                <Pagination.Next onClick={handleNext} disabled={currentPage === Math.ceil(filteredData.length / rowsPerPage)} />
+                <Pagination.Prev
+                  onClick={handlePrevious}
+                  disabled={currentPage === 1}
+                />
+                {Array.from(
+                  { length: Math.ceil(filteredData.length / rowsPerPage) },
+                  (_, index) => (
+                    <Pagination.Item
+                      key={index + 1}
+                      active={index + 1 === currentPage}
+                      onClick={() => paginate(index + 1)}
+                    >
+                      {index + 1}
+                    </Pagination.Item>
+                  )
+                )}
+                <Pagination.Next
+                  onClick={handleNext}
+                  disabled={
+                    currentPage === Math.ceil(filteredData.length / rowsPerPage)
+                  }
+                />
               </Pagination>
             </div>
           </div>
@@ -197,4 +216,4 @@ const DataTable = () => {
   );
 };
 
-export default DataTable;
+export default MyDataTable;

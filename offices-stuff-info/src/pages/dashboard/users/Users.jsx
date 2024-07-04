@@ -97,15 +97,17 @@ const Users = () => {
                 <tr className="text-center tableThBox">
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Role</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {paginatedUsers.length !== 0 ? (
-                  paginatedUsers.map(({ _id, name, email }) => (
+                  paginatedUsers.map(({ _id, name, email,role }) => (
                     <tr key={_id}>
                       <td>{name}</td>
                       <td>{email}</td>
+                      <td>{role}</td>
                       <td>
                         <RxCross2
                           size={30}

@@ -11,6 +11,8 @@ import SignUp from "../pages/home/Signup/Signup";
 import Login from "../pages/home/Login/Login";
 import PrivateRoute from "./PrivateRoute";
 import Users from "../pages/dashboard/users/Users";
+import MyDataTable from "../pages/dashboard/MyDataTable/MyDataTable";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,19 +33,35 @@ const router = createBrowserRouter([
       },
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <AdminRoute>
+            <Users />
+          </AdminRoute>
+        ),
       },
       {
         path: "logo",
-        element: <LogoDashboard />,
+        element: (
+          <AdminRoute>
+            <LogoDashboard />
+          </AdminRoute>
+        ),
       },
       {
         path: "headline",
-        element: <Headline />,
+        element: (
+          <AdminRoute>
+            <Headline />
+          </AdminRoute>
+        ),
       },
       {
         path: "edit-home",
-        element: <EditHome />,
+        element: (
+          <AdminRoute>
+            <EditHome />
+          </AdminRoute>
+        ),
       },
       {
         path: "data-input",
@@ -51,7 +69,15 @@ const router = createBrowserRouter([
       },
       {
         path: "data-table",
-        element: <DataTable />,
+        element: (
+          <AdminRoute>
+            <DataTable />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "my-data-table",
+        element: <MyDataTable />,
       },
     ],
   },
