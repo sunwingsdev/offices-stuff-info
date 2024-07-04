@@ -67,7 +67,7 @@ const Aside = () => {
         </div>
         <h2 className="DBText">DashBoard</h2>
         <ul className="dashboardMenu">
-          <Link to="/">
+          <Link to="/dashboard">
             <li className="">
               <FaHome />
               Home
