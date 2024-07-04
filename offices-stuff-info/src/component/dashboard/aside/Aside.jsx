@@ -55,6 +55,7 @@ const Aside = () => {
         });
       });
   };
+  
   if (loading) {
     return <Loader />;
   }
