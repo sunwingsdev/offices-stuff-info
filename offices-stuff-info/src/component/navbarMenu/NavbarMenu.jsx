@@ -38,18 +38,6 @@ const NavbarMenu = () => {
     setConsultantData(filteredData);
     return;
   };
-  // const adminData = data?.filter((singleData) => singleData.role === "admin");
-  // const serviceData = data?.filter(
-  //   (singleData) => singleData.role === "service"
-  // );
-  // const subAdminData = data?.filter(
-  //   (singleData) => singleData.role === "sub-admin"
-  // );
-  // const masterData = data?.filter((singleData) => singleData.role === "master");
-  // const superAgentData = data?.filter(
-  //   (singleData) => singleData.role === "super-agent-list"
-  // );
-
   const accountCreateData = contents?.find(
     (singleContent) => singleContent.option === "account-create"
   );
@@ -92,29 +80,12 @@ const NavbarMenu = () => {
                 onClick={() => handleConsultantData(consultant?.uid)}
                 key={consultant._id}
                 eventKey={consultant.uid}
-                className="tabsBox_1"
+                className="tabsBox_1 text-capitalize"
               >
                 <FaUserGraduate className="tabsIcon" />
                 {consultant?.name}
               </Nav.Link>
             ))}
-
-          {/* <Nav.Link eventKey="third" className="tabsBox_1">
-            <FaUserGraduate className="tabsIcon" />
-            Sub Admin
-          </Nav.Link>
-          <Nav.Link eventKey="four" className="tabsBox_1">
-            <FaUserTie className="tabsIcon" />
-            Super
-          </Nav.Link>
-          <Nav.Link eventKey="five" className="tabsBox_1">
-            <FaUserTie className="tabsIcon" />
-            Master
-          </Nav.Link>
-          <Nav.Link eventKey="six" className="tabsBox_1">
-            <RiCustomerService2Line className="tabsIcon" />
-            Service
-          </Nav.Link> */}
         </div>
 
         <Tab.Content>
@@ -233,22 +204,12 @@ const NavbarMenu = () => {
           {consultants?.length &&
             consultants?.map((consultant) => (
               <Tab.Pane key={consultant._id} eventKey={uid}>
-                <TabData tableHeading={consultant?.name} rows={consultantData} />
+                <TabData
+                  tableHeading={consultant?.name}
+                  rows={consultantData}
+                />
               </Tab.Pane>
             ))}
-
-          {/* <Tab.Pane eventKey="third">
-            <TabData tableHeading={"SUB ADMIN"} rows={subAdminData} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="four">
-            <TabData tableHeading={"SUPER AGENT LIST"} rows={superAgentData} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="five">
-            <TabData tableHeading={"MASTER"} rows={masterData} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="six">
-            <TabData tableHeading={"SERVICE"} rows={serviceData} />
-          </Tab.Pane> */}
         </Tab.Content>
       </Tab.Container>
     </div>

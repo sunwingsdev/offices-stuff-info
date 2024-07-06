@@ -14,12 +14,12 @@ const usersApi = require("./apis/usersApi/usersApi");
 
 const corsConfig = {
   origin: [
+    "https://office.sunwingsinfocard.com",
+    "http://office.sunwingsinfocard.com",
+    "www.office.sunwingsinfocard.com",
+    "office.sunwingsinfocard.com",
     "http://localhost:5173",
     "*",
-    "https://agentlist.oracletechnology.net",
-    "http://agentlist.oracletechnology.net",
-    "www.agentlist.oracletechnology.net",
-    "agentlist.oracletechnology.net",
   ],
   credentials: true,
   optionSuccessStatus: 200,
@@ -79,9 +79,9 @@ run().catch(console.dir);
 
 // =====basic set up=======
 app.get("/", (req, res) => {
-  res.send("Agent list book server is running");
+  res.send("Office stuff server is running");
 });
 
 app.listen(port, () => {
-  console.log("Agent list book server is running on port:🔥", port);
+  console.log("Office stuff server is running on port:🔥", port);
 });

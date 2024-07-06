@@ -6,6 +6,7 @@ import "./DataTable.css";
 import { useGetAllDataQuery } from "../../../redux/features/allApis/dataApi/dataApi";
 import Loader from "../../../component/shared/Loader";
 import { FiPhoneIncoming, FiPhoneOutgoing } from "react-icons/fi";
+import moment from "moment";
 
 const DataTable = () => {
   const { data, isLoading, isError } = useGetAllDataQuery();
@@ -22,7 +23,10 @@ const DataTable = () => {
   // Function to check if object contains search term in any field
   const doesObjectContainSearchTerm = (obj, term) => {
     for (let key in obj) {
-      if (obj[key] && obj[key].toString().toLowerCase().includes(term.toLowerCase())) {
+      if (
+        obj[key] &&
+        obj[key].toString().toLowerCase().includes(term.toLowerCase())
+      ) {
         return true;
       }
     }
@@ -124,9 +128,10 @@ const DataTable = () => {
                 <tr className="text-center tableThBox">
                   <th>NAME</th>
                   <th>PHONE</th>
-                  <th>PHONE APP LINK</th>
+                  <th>CHAT</th>
                   <th>CONSULTANT</th>
                   <th>CALL METHOD</th>
+                  <th>DATE & TIME</th>
                   <th>COMMENTS</th>
                 </tr>
               </thead>
@@ -141,6 +146,7 @@ const DataTable = () => {
                       comments,
                       platform,
                       callMethod,
+                      createdAt,
                       consultant,
                     }) => (
                       <tr key={id} className="text-center">
@@ -153,14 +159,16 @@ const DataTable = () => {
                             rel="noopener noreferrer"
                           >
                             <FaWhatsappSquare className="whatsAppIcon whatsAppIcon_2" />
-                            {whatsappNumber}
                           </Link>
                         </td>
                         <td>{consultant}</td>
                         <td>
                           {platform}{" "}
-                          {callMethod === "incoming" && <FiPhoneIncoming />}
-                          {callMethod === "outgoing" && <FiPhoneOutgoing />}
+                          {callMethod === "incoming" && <FiPhoneIncoming className="text-danger"/>}
+                          {callMethod === "outgoing" && <FiPhoneOutgoing className="text-primary"/>}
+                        </td>
+                        <td>
+                          {moment(createdAt).format("MMM Do YY ,h:mm:ss a")}
                         </td>
                         <td>{comments}</td>
                       </tr>
@@ -177,17 +185,28 @@ const DataTable = () => {
             </Table>
             <div className="pagination-container">
               <Pagination>
-                <Pagination.Prev onClick={handlePrevious} disabled={currentPage === 1} />
-                {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => (
-                  <Pagination.Item
-                    key={index + 1}
-                    active={index + 1 === currentPage}
-                    onClick={() => paginate(index + 1)}
-                  >
-                    {index + 1}
-                  </Pagination.Item>
-                ))}
-                <Pagination.Next onClick={handleNext} disabled={currentPage === Math.ceil(filteredData.length / rowsPerPage)} />
+                <Pagination.Prev
+                  onClick={handlePrevious}
+                  disabled={currentPage === 1}
+                />
+                {Array.from(
+                  { length: Math.ceil(filteredData.length / rowsPerPage) },
+                  (_, index) => (
+                    <Pagination.Item
+                      key={index + 1}
+                      active={index + 1 === currentPage}
+                      onClick={() => paginate(index + 1)}
+                    >
+                      {index + 1}
+                    </Pagination.Item>
+                  )
+                )}
+                <Pagination.Next
+                  onClick={handleNext}
+                  disabled={
+                    currentPage === Math.ceil(filteredData.length / rowsPerPage)
+                  }
+                />
               </Pagination>
             </div>
           </div>

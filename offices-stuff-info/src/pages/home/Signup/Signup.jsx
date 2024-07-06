@@ -4,6 +4,7 @@ import "./Signup.css";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useAddUserMutation } from "../../../redux/features/allApis/usersApi/usersApi";
 import { useToasts } from "react-toast-notifications";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const { createUser, setUser, updateUserProfile, user } =
@@ -136,7 +137,9 @@ const Signup = () => {
           <p className="error-message">{errors.confirmPassword.message}</p>
         )}
       </div>
-
+      <p className="my-3">
+        Already have an account? Please <Link to="/login">Login</Link>
+      </p>
       <button
         type="submit"
         disabled={!isValid || !passwordMatch || loading}
