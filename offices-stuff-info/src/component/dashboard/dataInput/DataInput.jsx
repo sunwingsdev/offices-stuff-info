@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import "./DataInput.css";
 import { useAddDataMutation } from "../../../redux/features/allApis/dataApi/dataApi";
 import { useToasts } from "react-toast-notifications";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const DataInput = () => {
+  const { user } = useContext(AuthContext);
   const [addData] = useAddDataMutation();
   const [loading, setLoading] = useState(false);
   const {
@@ -14,11 +16,17 @@ const DataInput = () => {
     reset,
   } = useForm();
   const { addToast } = useToasts();
-
   const onSubmit = async (data) => {
-    setLoading(true);
+    const dataInfo = {
+      ...data,
+      consultant: user?.displayName,
+      consultantEmail: user?.email,
+      consultantUid: user?.uid,
+    };
+
     try {
-      const result = await addData(data);
+      setLoading(true);
+      const result = await addData(dataInfo);
       if (result.data.insertedId) {
         addToast("Data added successfully", {
           appearance: "success",
@@ -41,58 +49,76 @@ const DataInput = () => {
         <select
           className="form__input mb-4"
           aria-label="Default select example"
-          {...register("role")}
+          {...register("platform")}
         >
-          <option value="admin">Admin</option>
-          <option value="sub-admin">Sub Admin</option>
-          <option value="super-agent-list">Super Agent List</option>
-          <option value="master">Master</option>
-          <option value="service">Service</option>
-          <option value="quickContact">Quick Contact</option>
+          <option selected value="landphone">
+            Land-phone
+          </option>
+          <option value="whatsapp">Whatsapp</option>
         </select>
-
+        <select
+          className="form__input mb-4"
+          aria-label="Default select example"
+          {...register("callMethod")}
+        >
+          <option selected value="incoming">
+            Incoming
+          </option>
+          <option value="outgoing">Outgoing</option>
+        </select>
         <input
           type="text"
-          placeholder="TYPE"
+          placeholder="NAME"
           className="form__input"
           id="name"
-          {...register("type", { required: true })}
+          {...register("name", { required: true })}
         />
         <label htmlFor="name" className="form__label">
-          Type
+          Name *
         </label>
-        {errors.type && <span className="error">This field is required</span>}
+        {errors.name && <span className="error">This field is required</span>}
+        <input
+          type="text"
+          placeholder="NAME"
+          className="form__input"
+          id="phone"
+          {...register("phone", { required: true })}
+        />
+        <label htmlFor="phone" className="form__label">
+          Phone *
+        </label>
+        {errors.phone && <span className="error">This field is required</span>}
 
         <input
           type="text"
-          placeholder="Number"
+          placeholder="Whatsapp Number"
           className="form__input"
-          id="number"
-          {...register("number", {
+          id="whatsappNumber"
+          {...register("whatsappNumber", {
             required: "This field is required",
             pattern: {
               value: /^\+\d+$/,
-              message: "Please enter a valid number with country code",
+              message: "Please enter a whatsapp number with country code",
             },
           })}
         />
-        <label htmlFor="number" className="form__label">
-          Number
+        <label htmlFor="whatsappNumber" className="form__label">
+          Whatsapp Number *
         </label>
-        {errors.number && (
-          <span className="error">{errors.number.message}</span>
+        {errors.whatsappNumber && (
+          <span className="error">{errors.whatsappNumber.message}</span>
         )}
 
         <textarea
-          placeholder="Complain"
+          placeholder="Comments"
           className="form__input"
-          id="complain"
-          {...register("complain", { required: true })}
+          id="comments"
+          {...register("comments", { required: true })}
         />
-        <label htmlFor="complain" className="form__label">
-          Complain
+        <label htmlFor="comments" className="form__label">
+          Comments *
         </label>
-        {errors.complain && (
+        {errors.comments && (
           <span className="error">This field is required</span>
         )}
 

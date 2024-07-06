@@ -4,11 +4,10 @@ import { Tab, Nav } from "react-bootstrap";
 import { IoHome } from "react-icons/io5";
 import {
   FaUserGraduate,
-  FaUserTie,
   FaWhatsappSquare,
   FaFacebookSquare,
 } from "react-icons/fa";
-import { RiCustomerService2Line } from "react-icons/ri";
+
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import AOS from "aos";
@@ -17,6 +16,8 @@ import TabData from "../home/TabData";
 import { useGetAllContentsQuery } from "../../redux/features/allApis/homeContentsApi.js/homeContentsApi";
 import { useGetAllDataQuery } from "../../redux/features/allApis/dataApi/dataApi";
 import Loader from "../shared/Loader";
+import { useGetAllUsersQuery } from "../../redux/features/allApis/usersApi/usersApi";
+import { useState } from "react";
 
 AOS.init();
 
@@ -24,17 +25,30 @@ const NavbarMenu = () => {
   const { data: contents, isLoading: contentLoading } =
     useGetAllContentsQuery();
   const { data } = useGetAllDataQuery();
-  const adminData = data?.filter((singleData) => singleData.role === "admin");
-  const serviceData = data?.filter(
-    (singleData) => singleData.role === "service"
-  );
-  const subAdminData = data?.filter(
-    (singleData) => singleData.role === "sub-admin"
-  );
-  const masterData = data?.filter((singleData) => singleData.role === "master");
-  const superAgentData = data?.filter(
-    (singleData) => singleData.role === "super-agent-list"
-  );
+  const { data: users } = useGetAllUsersQuery();
+  const [uid, setUid] = useState("");
+  const [consultantData, setConsultantData] = useState([]);
+  const consultants = users?.filter((user) => user.role === "consultant");
+
+  const handleConsultantData = (uid) => {
+    setUid(uid);
+    const filteredData = data?.filter(
+      (singleData) => singleData.consultantUid === uid
+    );
+    setConsultantData(filteredData);
+    return;
+  };
+  // const adminData = data?.filter((singleData) => singleData.role === "admin");
+  // const serviceData = data?.filter(
+  //   (singleData) => singleData.role === "service"
+  // );
+  // const subAdminData = data?.filter(
+  //   (singleData) => singleData.role === "sub-admin"
+  // );
+  // const masterData = data?.filter((singleData) => singleData.role === "master");
+  // const superAgentData = data?.filter(
+  //   (singleData) => singleData.role === "super-agent-list"
+  // );
 
   const accountCreateData = contents?.find(
     (singleContent) => singleContent.option === "account-create"
@@ -72,11 +86,20 @@ const NavbarMenu = () => {
             <IoHome className="tabsIcon" />
             Home
           </Nav.Link>
-          <Nav.Link eventKey="second" className="tabsBox_1">
-            <FaUserGraduate className="tabsIcon" />
-            Admin
-          </Nav.Link>
-          <Nav.Link eventKey="third" className="tabsBox_1">
+          {consultants?.length &&
+            consultants?.map((consultant) => (
+              <Nav.Link
+                onClick={() => handleConsultantData(consultant?.uid)}
+                key={consultant._id}
+                eventKey={consultant.uid}
+                className="tabsBox_1"
+              >
+                <FaUserGraduate className="tabsIcon" />
+                {consultant?.name}
+              </Nav.Link>
+            ))}
+
+          {/* <Nav.Link eventKey="third" className="tabsBox_1">
             <FaUserGraduate className="tabsIcon" />
             Sub Admin
           </Nav.Link>
@@ -91,7 +114,7 @@ const NavbarMenu = () => {
           <Nav.Link eventKey="six" className="tabsBox_1">
             <RiCustomerService2Line className="tabsIcon" />
             Service
-          </Nav.Link>
+          </Nav.Link> */}
         </div>
 
         <Tab.Content>
@@ -207,10 +230,14 @@ const NavbarMenu = () => {
               )}
             </div>
           </Tab.Pane>
-          <Tab.Pane eventKey="second">
-            <TabData tableHeading={"ADMIN"} rows={adminData} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="third">
+          {consultants?.length &&
+            consultants?.map((consultant) => (
+              <Tab.Pane key={consultant._id} eventKey={uid}>
+                <TabData tableHeading={consultant?.name} rows={consultantData} />
+              </Tab.Pane>
+            ))}
+
+          {/* <Tab.Pane eventKey="third">
             <TabData tableHeading={"SUB ADMIN"} rows={subAdminData} />
           </Tab.Pane>
           <Tab.Pane eventKey="four">
@@ -221,7 +248,7 @@ const NavbarMenu = () => {
           </Tab.Pane>
           <Tab.Pane eventKey="six">
             <TabData tableHeading={"SERVICE"} rows={serviceData} />
-          </Tab.Pane>
+          </Tab.Pane> */}
         </Tab.Content>
       </Tab.Container>
     </div>

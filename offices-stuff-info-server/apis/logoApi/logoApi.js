@@ -7,7 +7,6 @@ const logoApi = (logosCollection) => {
   // add logo
   logoRouter.post("/", async (req, res) => {
     const logoInfo = req.body;
-    console.log(logoInfo);
     logoInfo.createdAt = new Date();
     logoInfo.isSelected = false;
     const result = await logosCollection.insertOne(logoInfo);
