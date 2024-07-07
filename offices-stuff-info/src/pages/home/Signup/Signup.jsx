@@ -72,85 +72,93 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
-      <div className="form-group">
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          {...register("name", { required: "Name is required" })}
-        />
-        {errors.name && <p className="error-message">{errors.name.message}</p>}
-      </div>
+    <div className="signUpMain">
+      <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            {...register("name", { required: "Name is required" })}
+          />
+          {errors.name && (
+            <p className="error-message">{errors.name.message}</p>
+          )}
+        </div>
 
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-              message: "Enter a valid email address",
-            },
-          })}
-        />
-        {errors.email && (
-          <p className="error-message">{errors.email.message}</p>
-        )}
-      </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                message: "Enter a valid email address",
+              },
+            })}
+          />
+          {errors.email && (
+            <p className="error-message">{errors.email.message}</p>
+          )}
+        </div>
 
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-            pattern: {
-              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{6,}$/,
-              message:
-                "Password must include at least one uppercase letter, one lowercase letter, and one number",
-            },
-          })}
-        />
-        {errors.password && (
-          <p className="error-message">{errors.password.message}</p>
-        )}
-      </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{6,}$/,
+                message:
+                  "Password must include at least one uppercase letter, one lowercase letter, and one number",
+              },
+            })}
+          />
+          {errors.password && (
+            <p className="error-message">{errors.password.message}</p>
+          )}
+        </div>
 
-      <div className="form-group">
-        <label htmlFor="confirmPassword">Confirm Password</label>
-        <input
-          id="confirmPassword"
-          type="password"
-          {...register("confirmPassword", {
-            required: "Confirm password is required",
-            validate: (value) => value === password || "Passwords do not match",
-          })}
-        />
-        {errors.confirmPassword && (
-          <p className="error-message">{errors.confirmPassword.message}</p>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            {...register("confirmPassword", {
+              required: "Confirm password is required",
+              validate: (value) =>
+                value === password || "Passwords do not match",
+            })}
+          />
+          {errors.confirmPassword && (
+            <p className="error-message">{errors.confirmPassword.message}</p>
+          )}
+        </div>
+        <p className="mt-2 mb-4 lh-sm">
+          Already have an account? Please{" "}
+          <Link to="/login" className="">
+            <u>Login</u>
+          </Link>
+        </p>
+        <button
+          type="submit"
+          disabled={!isValid || !passwordMatch || loading}
+          className="submit-button mb-3"
+        >
+          {loading ? "Signing up..." : "Sign Up"}
+        </button>
+        {!passwordMatch && (
+          <p className="error-message">Passwords do not match</p>
         )}
-      </div>
-      <p className="my-3">
-        Already have an account? Please <Link to="/login">Login</Link>
-      </p>
-      <button
-        type="submit"
-        disabled={!isValid || !passwordMatch || loading}
-        className="submit-button"
-      >
-        {loading ? "Signing up..." : "Sign Up"}
-      </button>
-      {!passwordMatch && (
-        <p className="error-message">Passwords do not match</p>
-      )}
-    </form>
+      </form>
+    </div>
   );
 };
 
