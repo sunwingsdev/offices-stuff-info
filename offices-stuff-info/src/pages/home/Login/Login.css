@@ -21,16 +21,22 @@
 .form-group {
   margin-bottom: 15px;
 }
+.loginSection label {
+  color: #2d2c2c;
+  font-size: 17px;
+  font-weight: 500;
+}
 
 .login-container input[type="email"],
 .login-container input[type="password"] {
   width: 100%;
-  padding: 8px;
+  padding: 8px 20px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   box-shadow: none !important;
   outline: none;
+  border: none;
+  border-radius: 20px;
+  background: #ffffff1f;
 }
 
 .error-message {
@@ -40,15 +46,29 @@
 }
 
 button {
+  width: 100%;
   background-color: #007bff;
   color: #fff;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 20px !important;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+@media (max-width: 450px) {
+  .login-container input[type="email"],
+  .login-container input[type="password"] {
+    padding: 8px 15px;
+  }
+  .loginSection {
+    padding: 15px;
+  }
+  .login-container {
+    padding: 20px 15px;
+  }
 }

@@ -38,12 +38,11 @@ const HeaderMenu = () => {
         </div>
         <NavbarMenu />
       </div>
-      <div className="dashboardIcon">
-        <Link to='/dashboard'>
-          <MdDashboard />
-          Dashboard
-        </Link>
-      </div>
+      <Link to="/dashboard">
+        <div className="dashboardIcon">
+          <MdDashboard className="MdDashboardIcon" />
+        </div>
+      </Link>
     </div>
   );
 };
