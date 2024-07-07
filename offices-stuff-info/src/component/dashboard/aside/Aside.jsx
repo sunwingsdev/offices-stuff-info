@@ -1,12 +1,10 @@
 import { useContext, useState } from "react";
 import "./Aside.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   FaHome,
   FaUser,
   FaAffiliatetheme,
-  FaMinus,
-  FaPlus,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
@@ -21,20 +19,10 @@ const Aside = () => {
   const { data: loggedUser } = useGetSingleUserQuery(user?.uid);
   const { data } = useGetAllLogosQuery();
   const selectedLogo = data?.find((logo) => logo.isSelected === true);
-  const [menuCollapsed, setMenuCollapsed] = useState({
-    theme: true,
-    homeContents: true,
-  });
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
 
   const { addToast } = useToasts();
-
-  const toggleMenu = (menu) => {
-    setMenuCollapsed((prevState) => ({
-      ...prevState,
-      [menu]: !prevState[menu],
-    }));
-  };
+  const location = useLocation();
 
   const toggleMobileMenu = () => {
     setMobileMenuVisible(!mobileMenuVisible);
@@ -55,7 +43,9 @@ const Aside = () => {
         });
       });
   };
-  
+
+  const isActive = (path) => location.pathname === path;
+
   if (loading) {
     return <Loader />;
   }
@@ -74,94 +64,72 @@ const Aside = () => {
         </div>
         <h2 className="DBText">Dashboard</h2>
         <ul className="dashboardMenu">
-          <Link to="/dashboard">
-            <li className="">
+          <NavLink
+            to="/dashboard"
+            className={() => (isActive("/dashboard") ? "tabActive" : "")}
+          >
+            <li>
               <FaHome />
               Home
             </li>
-          </Link>
+          </NavLink>
           {loggedUser?.role === "admin" && (
             <NavLink
-              className={({ isActive }) => `${isActive && "tabActive"}`}
               to="/dashboard/users"
+              className={() => (isActive("/dashboard/users") ? "tabActive" : "")}
             >
               <li>
                 <FaUser />
-                User
+                Users
               </li>
             </NavLink>
           )}
           {loggedUser?.role === "admin" && (
-            <li className="bSubMenu" onClick={() => toggleMenu("theme")}>
-              <div className="d-flex align-items-center gap-2">
+            <NavLink
+              to="/dashboard/logo"
+              className={() => (isActive("/dashboard/logo") ? "tabActive" : "")}
+            >
+              <li>
                 <FaAffiliatetheme />
-                Theme
-              </div>
-              <div>{menuCollapsed.theme ? <FaPlus /> : <FaMinus />}</div>
-            </li>
+                Logo
+              </li>
+            </NavLink>
           )}
-
-          {loggedUser?.role === "admin" && !menuCollapsed.theme && (
-            <ul
-              className={`dashboardSubMenu ${
-                menuCollapsed.theme ? "" : "expanded"
-              }`}
+          {loggedUser?.role === "admin" && (
+            <NavLink
+              to="/dashboard/headline"
+              className={() => (isActive("/dashboard/headline") ? "tabActive" : "")}
             >
-              <NavLink
-                className={({ isActive }) => ` ${isActive && "tabActive"}`}
-                to="/dashboard/logo"
-              >
-                <li>▪ Logo</li>
-              </NavLink>
-            </ul>
+              <li>Headline</li>
+            </NavLink>
           )}
-          <li className="bSubMenu" onClick={() => toggleMenu("homeContents")}>
-            <div className="d-flex align-items-center gap-2">Home Contents</div>
-            {menuCollapsed.homeContents ? <FaPlus /> : <FaMinus />}
-          </li>
-          {!menuCollapsed.homeContents && (
-            <ul
-              className={`dashboardSubMenu ${
-                menuCollapsed.homeContents ? "" : "expanded"
-              }`}
+          {loggedUser?.role === "admin" && (
+            <NavLink
+              to="/dashboard/edit-home"
+              className={() => (isActive("/dashboard/edit-home") ? "tabActive" : "")}
             >
-              {loggedUser?.role === "admin" && (
-                <NavLink
-                  className={({ isActive }) => ` ${isActive && "tabActive"}`}
-                  to="/dashboard/headline"
-                >
-                  <li>▪ Headline</li>
-                </NavLink>
-              )}
-              {loggedUser?.role === "admin" && (
-                <NavLink
-                  className={({ isActive }) => ` ${isActive && "tabActive"}`}
-                  to="/dashboard/edit-home"
-                >
-                  <li>▪ Edit Home</li>
-                </NavLink>
-              )}
-              <NavLink
-                className={({ isActive }) => ` ${isActive && "tabActive"}`}
-                to="/dashboard/data-input"
-              >
-                <li>▪ Data Input</li>
-              </NavLink>
-              <NavLink
-                className={({ isActive }) => ` ${isActive && "tabActive"}`}
-                to="/dashboard/my-data-table"
-              >
-                <li>▪ My Data Table</li>
-              </NavLink>
-              {loggedUser?.role === "admin" && (
-                <NavLink
-                  className={({ isActive }) => ` ${isActive && "tabActive"}`}
-                  to="/dashboard/data-table"
-                >
-                  <li>▪ Data Table</li>
-                </NavLink>
-              )}
-            </ul>
+              <li>Edit Home</li>
+            </NavLink>
+          )}
+          <NavLink
+            to="/dashboard/data-input"
+            className={() => (isActive("/dashboard/data-input") ? "tabActive" : "")}
+          >
+            <li>Data Input</li>
+          </NavLink>
+          <NavLink
+            to="/dashboard/my-data-table"
+            className={() => (isActive("/dashboard/my-data-table") ? "tabActive" : "")}
+          >
+            <li>My Data Table</li>
+          </NavLink>
+          {loggedUser?.role === "admin" && (
+            <NavLink
+              to="/dashboard/data-table"
+              className={() => (isActive("/dashboard/data-table") ? "tabActive" : "")}
+            >
+              <li>Data Table</li>
+            </NavLink>
           )}
           <li className="bSubMenu" onClick={handleLogout}>
             <div className="d-flex align-items-center gap-2">Log out</div>

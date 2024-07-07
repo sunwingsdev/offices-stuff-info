@@ -48,7 +48,7 @@
   transition: all 360ms ease;
 }
 
-.dashboardMenu li.active,
+.dashboardMenu li.tabActive,
 .dashboardMenu li:hover {
   color: #000000;
   background: #ffdf6e;
@@ -74,6 +74,12 @@
 
 .rotate-icon {
   transition: transform 0.3s ease-out;
+}
+
+.tabActive {
+  color: #000000 !important;
+  background: #ffdf6e;
+  border-radius: 10px;
 }
 
 /* Responsive Styles */

@@ -169,8 +169,8 @@ const MyDataTable = () => {
                         <td>{consultant}</td>
                         <td>
                           {platform}{" "}
-                          {callMethod === "incoming" && <FiPhoneIncoming />}
-                          {callMethod === "outgoing" && <FiPhoneOutgoing />}
+                          {callMethod === "incoming" && <FiPhoneIncoming className="text-danger" />}
+                          {callMethod === "outgoing" && <FiPhoneOutgoing className="text-primary"/>}
                         </td>
                         <td>
                           {moment(createdAt).format("MMM Do YY ,h:mm:ss a")}
