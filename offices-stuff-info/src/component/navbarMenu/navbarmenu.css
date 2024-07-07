@@ -128,7 +128,6 @@
 }
 
 .tabContain_2 {
-  max-width: 96%;
   margin: 20px auto !important;
 }
 .tabContainItem_2 h2 {
@@ -169,7 +168,6 @@
 }
 .tabContainItem_2 .table > tbody {
   vertical-align: middle;
-  white-space: nowrap;
 }
 .whatsAppIcon_2 {
   color: #1bd741;
