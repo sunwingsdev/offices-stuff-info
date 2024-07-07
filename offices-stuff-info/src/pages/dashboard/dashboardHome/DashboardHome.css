@@ -1,36 +1,120 @@
+.dashboardHeading {
+  text-align: center;
+  margin-bottom: 20px !important;
+}
 .dashboardHomeMainContain {
   display: flex;
   gap: 26px;
-  align-items: center;
-  justify-content: space-between;
+  padding: 20px 10px;
 }
 .dashboardBox_1 {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
   width: 100%;
   padding: 10px 16px;
   border: 1px solid #7c7c7c;
-  border-left: 10px solid #1f1f1f;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   border-radius: 6px;
+  background: #ffffffa3;
 }
-.dashboardBox_1 p {
-  margin-bottom: 8px !important;
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 600;
+.border_rightBox_1 {
+  border-left: 10px solid #ad08df;
 }
-.Layer_D_Border {
-  height: 30px;
-  border-right: 1px dashed black;
+.border_rightBox_2 {
+  border-left: 10px solid #df2508;
 }
-.Layer_D_box {
+.singleBox_D .text_Box {
+  padding: 10px 0 !important;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: center;
+  border-bottom: 1px dashed black;
+}
+.singleBox_D_two {
+  display: flex;
+  gap: 10px;
+}
+.singleBox_F {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 6px;
 }
-.Layer_D_box .D_28 {
-  text-align: center;
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: 600;
+.IncomingIcon_Box {
+  color: green;
+  font-size: 20px;
+}
+.Outgoing_Box {
+  color: blue;
+  font-size: 20px;
+}
+.Layer_D_Border {
+  height: auto;
+  border-right: 1px dashed black;
+}
+.D_28 {
+  padding: 10px !important;
+  font-size: 20px;
+}
+@media (max-width: 1024px) {
+  .dashboardBox_1 {
+    gap: 6px;
+    padding: 10px 4px;
+  }
+  .D_28 {
+    padding: 10px 6px !important;
+  }
+}
+@media (max-width: 991px) {
+  .dashboardHomeMainContain {
+    justify-content: center;
+  }
+  .dashboardMainArea {
+    gap: 0;
+  }
+}
+@media (max-width: 768px) {
+  .dashboardHomeMainContain {
+    flex-direction: column;
+  }
+}
+@media (max-width: 576px) {
+  .singleBox_D .text_Box {
+    padding: 8px 0 10px 0 !important;
+    font-size: 22px;
+  }
+  .dashboardMainArea {
+    padding: 0px;
+  }
+  .singleBox_F {
+    gap: 0px;
+  }
+  .singleBox_D_two {
+    gap: 6px;
+  }
+  .dashboardBox_1 {
+    gap: 4px;
+    padding: 8px 8px;
+  }
+}
+@media (max-width: 450px) {
+  .D_28 {
+    font-size: 16px;
+  }
+  .singleBox_D_two {
+    gap: 4px;
+  }
+}
+@media (max-width: 350px) {
+  .singleBox_D .text_Box {
+    font-size: 20px;
+  }
+  .dashboardBox_1 {
+    flex-direction: column;
+  }
+  .singleBox_D_two {
+    justify-content: center;
+  }
 }
