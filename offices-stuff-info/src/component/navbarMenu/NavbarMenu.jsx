@@ -36,8 +36,8 @@ const NavbarMenu = () => {
       (singleData) => singleData.consultantUid === uid
     );
     setConsultantData(filteredData);
-    return;
   };
+
   const accountCreateData = contents?.find(
     (singleContent) => singleContent.option === "account-create"
   );
@@ -57,7 +57,6 @@ const NavbarMenu = () => {
     (singleContent) => singleContent.option === "social-links"
   );
 
-  // filtered quick master agent
   const quickMasterData = data?.find(
     (singleData) => singleData.role === "quickContact"
   );
@@ -68,14 +67,14 @@ const NavbarMenu = () => {
 
   return (
     <div className="tabsArea">
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Tab.Container id="left-tabs-example" activeKey={uid || "first"} onSelect={(k) => setUid(k)}>
         <div className="tabsMenuItemBox">
           <Nav.Link eventKey="first" className="tabsBox_1">
             <IoHome className="tabsIcon" />
             Home
           </Nav.Link>
           {consultants?.length &&
-            consultants?.map((consultant) => (
+            consultants.map((consultant) => (
               <Nav.Link
                 onClick={() => handleConsultantData(consultant?.uid)}
                 key={consultant._id}
@@ -189,11 +188,6 @@ const NavbarMenu = () => {
                       <FaFacebookSquare />
                       FACEBOOK GROUP
                     </Link>
-                    {/* <p>
-                      আপনার সকল জিজ্ঞাসা ও জানার বিষয়ে আমাদের গ্রুপে পোস্ট করুন।
-                      সকল এজেন্টদের থেকে আপনার পছন্দের এজেন্টকে বেছে নিন এবং
-                      নিরাপদে বেটিং করুন।
-                    </p> */}
                   </div>
                 </div>
               ) : (
@@ -202,11 +196,11 @@ const NavbarMenu = () => {
             </div>
           </Tab.Pane>
           {consultants?.length &&
-            consultants?.map((consultant) => (
-              <Tab.Pane key={consultant._id} eventKey={uid}>
+            consultants.map((consultant) => (
+              <Tab.Pane key={consultant._id} eventKey={consultant.uid}>
                 <TabData
                   tableHeading={consultant?.name}
-                  rows={consultantData}
+                  rows={uid === consultant.uid ? consultantData : []}
                 />
               </Tab.Pane>
             ))}

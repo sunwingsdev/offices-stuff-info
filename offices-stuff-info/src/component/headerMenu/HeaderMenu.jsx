@@ -21,7 +21,7 @@ const HeaderMenu = () => {
           </div>
           <div className="headerRightText">
             <Typewriter
-              words={["OFFICIAL AGENT LIST"]}
+              words={["OFFICIAL CALL LIST"]}
               loop={0}
               cursor={true}
               cursorColor="#ffdf6e"
