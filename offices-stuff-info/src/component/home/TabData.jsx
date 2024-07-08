@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Table, Pagination, Form, Badge } from "react-bootstrap";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { FiPhoneIncoming, FiPhoneOutgoing } from "react-icons/fi";
@@ -10,7 +10,7 @@ const TabData = ({ tableHeading, rows }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentDate, setCurrentDate] = useState();
+  const [currentDate, setCurrentDate] = useState(moment().format("MMM D, YY"));
 
   // Filter rows based on search term
   const filteredRows = rows.filter(
@@ -32,11 +32,9 @@ const TabData = ({ tableHeading, rows }) => {
   ];
 
   // Filter rows by current selected date
-  const rowsByDate = currentDate
-    ? filteredRows.filter(
-        (row) => moment(row.createdAt).format("MMM D, YY") === currentDate
-      )
-    : filteredRows;
+  const rowsByDate = filteredRows.filter(
+    (row) => moment(row.createdAt).format("MMM D, YY") === currentDate
+  );
 
   // Get current rows based on row pagination
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -104,11 +102,11 @@ const TabData = ({ tableHeading, rows }) => {
         <h2 className="text-capitalize px-4 py-2 bg-white">{tableHeading}</h2>
         <div className="row-count-info bg-white px-4 py-2 ">
           <p>
-            Rows for selected date:{" "}
+            Calls for selected date:{" "}
             <Badge variant="primary">{rowsByDate.length}</Badge>
           </p>
           <p>
-            Total rows: <Badge variant="secondary">{filteredRows.length}</Badge>
+            Total calls: <Badge variant="secondary">{filteredRows.length}</Badge>
           </p>
         </div>
       </div>
