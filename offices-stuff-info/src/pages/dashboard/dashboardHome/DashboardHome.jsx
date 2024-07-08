@@ -37,12 +37,12 @@ const DashboardHome = () => {
     }
   }, [data]);
 
-  const renderDataBox = (title, data, consultant) => (
+  const renderDataBox = (title, data, consultant = "") => (
     <div className="mainDashboardBox" key={`${title}-${consultant.uid}`}>
-      <h2 className="dashboardHeading">{`${title} - ${consultant.name}`}</h2>
+      <h3 className="dashboardHeading">{`${title} - ${consultant.name}`}</h3>
       <div className="dashboardBox_1 border_rightBox_1">
         <div className="singleBox_D">
-          <h2 className="text_Box">LandPhone</h2>
+          <h2 className="text_Box">Land-phone</h2>
           <div className="singleBox_D_two">
             <div className="singleBox_F IncomingIcon_Box">
               <VscCallIncoming />
@@ -53,7 +53,7 @@ const DashboardHome = () => {
                       (item) =>
                         item.platform === "landphone" &&
                         item.callMethod === "incoming" &&
-                        item.consultantUid === consultant.uid
+                        item.consultantUid === consultant?.uid
                     ).length
                   }
                 </span>
@@ -106,7 +106,83 @@ const DashboardHome = () => {
                       (item) =>
                         item.platform === "whatsapp" &&
                         item.callMethod === "outgoing" &&
-                        item.consultantUid === consultant.uid
+                        item.consultantUid === consultant?.uid
+                    ).length
+                  }
+                </span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  const renderTotalDataBox = (title, data) => (
+    <div className="mainDashboardBox" key={`${title}`}>
+      <h3 className="dashboardHeading">{`${title}`}</h3>
+      <div className="dashboardBox_1 border_rightBox_1">
+        <div className="singleBox_D">
+          <h2 className="text_Box">Land-phone</h2>
+          <div className="singleBox_D_two">
+            <div className="singleBox_F IncomingIcon_Box">
+              <VscCallIncoming />
+              <h2 className="D_28">
+                <span>
+                  {
+                    data.filter(
+                      (item) =>
+                        item.platform === "landphone" &&
+                        item.callMethod === "incoming" 
+                    ).length
+                  }
+                </span>
+              </h2>
+            </div>
+            <div className="Layer_D_Border"></div>
+            <div className="singleBox_F Outgoing_Box">
+              <VscCallOutgoing />
+              <h2 className="D_28">
+                <span>
+                  {
+                    data.filter(
+                      (item) =>
+                        item.platform === "landphone" &&
+                        item.callMethod === "outgoing" 
+                    ).length
+                  }
+                </span>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="Layer_D_Border"></div>
+        <div className="singleBox_D">
+          <h2 className="text_Box">WhatsApp</h2>
+          <div className="singleBox_D_two">
+            <div className="singleBox_F IncomingIcon_Box">
+              <VscCallIncoming />
+              <h2 className="D_28">
+                <span>
+                  {
+                    data.filter(
+                      (item) =>
+                        item.platform === "whatsapp" &&
+                        item.callMethod === "incoming" 
+                    ).length
+                  }
+                </span>
+              </h2>
+            </div>
+            <div className="Layer_D_Border"></div>
+            <div className="singleBox_F Outgoing_Box">
+              <VscCallOutgoing />
+              <h2 className="D_28">
+                <span>
+                  {
+                    data.filter(
+                      (item) =>
+                        item.platform === "whatsapp" &&
+                        item.callMethod === "outgoing" 
                     ).length
                   }
                 </span>
@@ -127,6 +203,10 @@ const DashboardHome = () => {
   return (
     <div className="">
       <div className="dashboardHomeMainContain">
+        <div className="d-flex justify-content-start align-items-center gap-5">
+          {renderTotalDataBox("Today", todayData)}
+          {renderTotalDataBox("Last Month", lastMonthData)}
+        </div>
         {consultants.map((consultant) => (
           <div
             className="d-flex justify-content-start align-items-center gap-5"
