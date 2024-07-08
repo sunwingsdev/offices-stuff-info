@@ -148,6 +148,6 @@
 
   .DBText,
   .dashboardLogoImg {
-    display: none;
+    width: 70;
   }
 }
