@@ -6,6 +6,7 @@ import { FiPhoneIncoming, FiPhoneOutgoing } from "react-icons/fi";
 import { useGetAllDataQuery } from "../../../redux/features/allApis/dataApi/dataApi";
 import Loader from "../../../component/shared/Loader";
 import { AuthContext } from "../../../providers/AuthProvider";
+import moment from "moment";
 
 const MyDataTable = () => {
   const { user, loading } = useContext(AuthContext);
@@ -132,9 +133,9 @@ const MyDataTable = () => {
                 <tr className="text-center tableThBox">
                   <th>NAME</th>
                   <th>PHONE</th>
-                  <th>PHONE APP LINK</th>
-                  <th>CONSULTANT</th>
+                  <th>CHAT</th>
                   <th>CALL METHOD</th>
+                  <th>DATE & TIME</th>
                   <th>COMMENTS</th>
                 </tr>
               </thead>
@@ -149,7 +150,7 @@ const MyDataTable = () => {
                       comments,
                       platform,
                       callMethod,
-                      consultant,
+                      createdAt,
                     }) => (
                       <tr key={id} className="text-center">
                         <td>{name}</td>
@@ -161,14 +162,15 @@ const MyDataTable = () => {
                             rel="noopener noreferrer"
                           >
                             <FaWhatsappSquare className="whatsAppIcon whatsAppIcon_2" />
-                            {whatsappNumber}
                           </Link>
                         </td>
-                        <td>{consultant}</td>
                         <td>
                           {platform}{" "}
-                          {callMethod === "incoming" && <FiPhoneIncoming />}
-                          {callMethod === "outgoing" && <FiPhoneOutgoing />}
+                          {callMethod === "incoming" && <FiPhoneIncoming className="text-danger" />}
+                          {callMethod === "outgoing" && <FiPhoneOutgoing className="text-primary"/>}
+                        </td>
+                        <td>
+                          {moment(createdAt).format("MMM Do YY ,h:mm:ss a")}
                         </td>
                         <td>{comments}</td>
                       </tr>

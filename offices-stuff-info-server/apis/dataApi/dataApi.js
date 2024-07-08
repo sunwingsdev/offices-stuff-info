@@ -25,7 +25,10 @@ const dataApi = (dataCollection) => {
 
   //   get all data
   dataRouter.get("/", async (req, res) => {
-    const result = await dataCollection.find().toArray();
+    const result = await dataCollection
+      .find()
+      .sort({ createdAt: -1 })
+      .toArray();
     res.send(result);
   });
 

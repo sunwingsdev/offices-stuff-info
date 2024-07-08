@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import "./Login.css"; // Assuming you have a CSS file for styling
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 
 const Login = () => {
@@ -69,6 +69,12 @@ const Login = () => {
               <span className="error-message">{errors.password.message}</span>
             )}
           </div>
+          <p className="mt-2 mb-4">
+            No account? Please{" "}
+            <Link to="/signup">
+              <u>Register</u>
+            </Link>
+          </p>
           <button disabled={loadingState} type="submit">
             {loadingState ? "Logging in..." : "Login"}
           </button>
