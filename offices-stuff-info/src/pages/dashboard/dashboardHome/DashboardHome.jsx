@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../../../component/shared/Loader";
 import { useGetAllDataQuery } from "../../../redux/features/allApis/dataApi/dataApi";
 import "./DashboardHome.css";
 import { VscCallIncoming, VscCallOutgoing } from "react-icons/vsc";
 import moment from "moment";
-import { useGetAllUsersQuery } from "../../../redux/features/allApis/usersApi/usersApi";
+import {
+  useGetAllUsersQuery,
+  useGetSingleUserQuery,
+} from "../../../redux/features/allApis/usersApi/usersApi";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const DashboardHome = () => {
+  const { user, loading } = useContext(AuthContext);
   const { data, isLoading } = useGetAllDataQuery();
+  const { data: loggedUser, isLoading: loggedUserLoading } =
+    useGetSingleUserQuery(user?.uid);
+
   const { data: users, isLoading: usersLoading } = useGetAllUsersQuery();
   const [todayData, setTodayData] = useState([]);
   const [lastMonthData, setLastMonthData] = useState([]);
@@ -48,6 +57,13 @@ const DashboardHome = () => {
               <VscCallIncoming />
               <h2 className="D_28">
                 <span>
+                  {/* <Link
+                    to={`${
+                      loggedUser?.role === "admin"
+                        ? "/dashboard/data-table"
+                        : "/dashboard/my-data-table"
+                    }`}
+                  > */}
                   {
                     data.filter(
                       (item) =>
@@ -56,6 +72,7 @@ const DashboardHome = () => {
                         item.consultantUid === consultant?.uid
                     ).length
                   }
+                  {/* </Link> */}
                 </span>
               </h2>
             </div>
@@ -128,13 +145,21 @@ const DashboardHome = () => {
               <VscCallIncoming />
               <h2 className="D_28">
                 <span>
-                  {
-                    data.filter(
-                      (item) =>
-                        item.platform === "landphone" &&
-                        item.callMethod === "incoming"
-                    ).length
-                  }
+                  <Link
+                    to={`${
+                      loggedUser?.role === "admin"
+                        ? "/dashboard/data-table"
+                        : "/dashboard/my-data-table"
+                    }`}
+                  >
+                    {
+                      data.filter(
+                        (item) =>
+                          item.platform === "landphone" &&
+                          item.callMethod === "incoming"
+                      ).length
+                    }
+                  </Link>
                 </span>
               </h2>
             </div>
@@ -143,13 +168,21 @@ const DashboardHome = () => {
               <VscCallOutgoing />
               <h2 className="D_28">
                 <span>
-                  {
-                    data.filter(
-                      (item) =>
-                        item.platform === "landphone" &&
-                        item.callMethod === "outgoing"
-                    ).length
-                  }
+                  <Link
+                    to={`${
+                      loggedUser?.role === "admin"
+                        ? "/dashboard/data-table"
+                        : "/dashboard/my-data-table"
+                    }`}
+                  >
+                    {
+                      data.filter(
+                        (item) =>
+                          item.platform === "landphone" &&
+                          item.callMethod === "outgoing"
+                      ).length
+                    }
+                  </Link>
                 </span>
               </h2>
             </div>
@@ -163,13 +196,21 @@ const DashboardHome = () => {
               <VscCallIncoming />
               <h2 className="D_28">
                 <span>
-                  {
-                    data.filter(
-                      (item) =>
-                        item.platform === "whatsapp" &&
-                        item.callMethod === "incoming"
-                    ).length
-                  }
+                  <Link
+                    to={`${
+                      loggedUser?.role === "admin"
+                        ? "/dashboard/data-table"
+                        : "/dashboard/my-data-table"
+                    }`}
+                  >
+                    {
+                      data.filter(
+                        (item) =>
+                          item.platform === "whatsapp" &&
+                          item.callMethod === "incoming"
+                      ).length
+                    }
+                  </Link>
                 </span>
               </h2>
             </div>
@@ -178,13 +219,21 @@ const DashboardHome = () => {
               <VscCallOutgoing />
               <h2 className="D_28">
                 <span>
-                  {
-                    data.filter(
-                      (item) =>
-                        item.platform === "whatsapp" &&
-                        item.callMethod === "outgoing"
-                    ).length
-                  }
+                  <Link
+                    to={`${
+                      loggedUser?.role === "admin"
+                        ? "/dashboard/data-table"
+                        : "/dashboard/my-data-table"
+                    }`}
+                  >
+                    {
+                      data.filter(
+                        (item) =>
+                          item.platform === "whatsapp" &&
+                          item.callMethod === "outgoing"
+                      ).length
+                    }
+                  </Link>
                 </span>
               </h2>
             </div>
@@ -194,7 +243,7 @@ const DashboardHome = () => {
     </div>
   );
 
-  if (isLoading || usersLoading) {
+  if (isLoading || usersLoading || loggedUserLoading || loading) {
     return <Loader />;
   }
 
