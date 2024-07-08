@@ -175,7 +175,6 @@
 .pagination-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px; /* Adjust as needed for spacing */
 }
 
 @media (max-width: 991px) {
