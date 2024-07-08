@@ -128,10 +128,7 @@ const DashboardHome = () => {
     <div className="">
       <div className="dashboardHomeMainContain">
         {consultants.map((consultant) => (
-          <div
-            className="d-flex justify-content-start align-items-center gap-5"
-            key={consultant.uid}
-          >
+          <div className="dashboardHomeMainContain_box_2" key={consultant.uid}>
             {renderDataBox("Today", todayData, consultant)}
             {renderDataBox("Last Month", lastMonthData, consultant)}
           </div>
