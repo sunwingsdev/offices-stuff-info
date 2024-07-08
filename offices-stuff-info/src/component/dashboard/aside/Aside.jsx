@@ -16,7 +16,7 @@ import Loader from "../../shared/Loader";
 
 const Aside = () => {
   const { logOut, user, loading } = useContext(AuthContext);
-  const { data: loggedUser } = useGetSingleUserQuery(user?.uid);
+  const { data: loggedUser,isLoading } = useGetSingleUserQuery(user?.uid);
   const { data } = useGetAllLogosQuery();
   const selectedLogo = data?.find((logo) => logo.isSelected === true);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -46,7 +46,7 @@ const Aside = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  if (loading) {
+  if (loading ||isLoading) {
     return <Loader />;
   }
   return (
