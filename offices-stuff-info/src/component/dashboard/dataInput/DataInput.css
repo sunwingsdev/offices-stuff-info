@@ -124,3 +124,7 @@
     pointer-events: none;
   }
 }
+
+.dataInputText button {
+  width: 200px;
+}

@@ -3,7 +3,12 @@
 }
 .dashboardHeading {
   text-align: center;
-  margin-bottom: 20px !important;
+  margin-bottom: 0px !important;
+  border-top: 2px dashed #ffffff;
+  border-radius: 30px 30px 0px 0px;
+  padding: 7px 2px !important;
+  background: #4169e1ba;
+  color: white;
 }
 .dashboardHomeMainContain {
   display: flex;
@@ -17,21 +22,20 @@
   gap: 10px;
   width: 100%;
   padding: 10px 16px;
-  border: 1px solid #7c7c7c;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  border-radius: 6px;
+  border-radius: 0 0 6px 6px;
   background: #ffffffa3;
 }
-.border_rightBox_1 {
+/* .border_rightBox_1 {
   border-left: 10px solid #ad08df;
-}
+} */
 .border_rightBox_2 {
   border-left: 10px solid #df2508;
 }
 .singleBox_D .text_Box {
   padding: 10px 0 !important;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 500;
   line-height: 26px;
   text-align: center;
@@ -93,7 +97,6 @@
 @media (max-width: 576px) {
   .singleBox_D .text_Box {
     padding: 8px 0 10px 0 !important;
-    font-size: 22px;
   }
   .dashboardMainArea {
     padding: 0px;
