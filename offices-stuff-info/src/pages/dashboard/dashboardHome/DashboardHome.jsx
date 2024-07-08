@@ -42,7 +42,7 @@ const DashboardHome = () => {
       <h3 className="dashboardHeading">{`${title} - ${consultant.name}`}</h3>
       <div className="dashboardBox_1 border_rightBox_1">
         <div className="singleBox_D">
-          <h2 className="text_Box">Land-phone</h2>
+          <h3 className="text_Box">Land-phone</h3>
           <div className="singleBox_D_two">
             <div className="singleBox_F IncomingIcon_Box">
               <VscCallIncoming />
@@ -122,7 +122,7 @@ const DashboardHome = () => {
       <h3 className="dashboardHeading">{`${title}`}</h3>
       <div className="dashboardBox_1 border_rightBox_1">
         <div className="singleBox_D">
-          <h2 className="text_Box">Land-phone</h2>
+          <h3 className="text_Box">Land-phone</h3>
           <div className="singleBox_D_two">
             <div className="singleBox_F IncomingIcon_Box">
               <VscCallIncoming />
@@ -132,7 +132,7 @@ const DashboardHome = () => {
                     data.filter(
                       (item) =>
                         item.platform === "landphone" &&
-                        item.callMethod === "incoming" 
+                        item.callMethod === "incoming"
                     ).length
                   }
                 </span>
@@ -147,7 +147,7 @@ const DashboardHome = () => {
                     data.filter(
                       (item) =>
                         item.platform === "landphone" &&
-                        item.callMethod === "outgoing" 
+                        item.callMethod === "outgoing"
                     ).length
                   }
                 </span>
@@ -167,7 +167,7 @@ const DashboardHome = () => {
                     data.filter(
                       (item) =>
                         item.platform === "whatsapp" &&
-                        item.callMethod === "incoming" 
+                        item.callMethod === "incoming"
                     ).length
                   }
                 </span>
@@ -182,7 +182,7 @@ const DashboardHome = () => {
                     data.filter(
                       (item) =>
                         item.platform === "whatsapp" &&
-                        item.callMethod === "outgoing" 
+                        item.callMethod === "outgoing"
                     ).length
                   }
                 </span>
@@ -203,15 +203,12 @@ const DashboardHome = () => {
   return (
     <div className="">
       <div className="dashboardHomeMainContain">
-        <div className="d-flex justify-content-start align-items-center gap-5">
+        <div className="dashboardHomeMainContain_box_2">
           {renderTotalDataBox("Today", todayData)}
           {renderTotalDataBox("Last Month", lastMonthData)}
         </div>
         {consultants.map((consultant) => (
-          <div
-            className="d-flex justify-content-start align-items-center gap-5"
-            key={consultant.uid}
-          >
+          <div className="dashboardHomeMainContain_box_2" key={consultant.uid}>
             {renderDataBox("Today", todayData, consultant)}
             {renderDataBox("Last Month", lastMonthData, consultant)}
           </div>
