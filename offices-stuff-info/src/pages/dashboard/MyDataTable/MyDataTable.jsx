@@ -134,7 +134,6 @@ const MyDataTable = () => {
                   <th>NAME</th>
                   <th>PHONE</th>
                   <th>CHAT</th>
-                  <th>CONSULTANT</th>
                   <th>CALL METHOD</th>
                   <th>DATE & TIME</th>
                   <th>COMMENTS</th>
@@ -152,7 +151,6 @@ const MyDataTable = () => {
                       platform,
                       callMethod,
                       createdAt,
-                      consultant,
                     }) => (
                       <tr key={id} className="text-center">
                         <td>{name}</td>
@@ -166,7 +164,6 @@ const MyDataTable = () => {
                             <FaWhatsappSquare className="whatsAppIcon whatsAppIcon_2" />
                           </Link>
                         </td>
-                        <td>{consultant}</td>
                         <td>
                           {platform}{" "}
                           {callMethod === "incoming" && <FiPhoneIncoming className="text-danger" />}

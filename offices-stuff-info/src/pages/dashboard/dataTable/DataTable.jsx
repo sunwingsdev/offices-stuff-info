@@ -11,16 +11,15 @@ import moment from "moment";
 const DataTable = () => {
   const { data, isLoading, isError } = useGetAllDataQuery();
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortOrder, setSortOrder] = useState("latest"); // State to track sorting order
+  const [sortOrder, setSortOrder] = useState("latest");
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(10); // You can change this number for more or fewer rows per page
+  const [rowsPerPage] = useState(10);
+  const [currentDate, setCurrentDate] = useState(moment().format("YYYY-MM-DD"));
 
-  // Function to handle search input change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Function to check if object contains search term in any field
   const doesObjectContainSearchTerm = (obj, term) => {
     for (let key in obj) {
       if (
@@ -33,7 +32,6 @@ const DataTable = () => {
     return false;
   };
 
-  // Function to sort data based on createdAt field
   const sortData = (data) => {
     return data.sort((a, b) => {
       const dateA = new Date(a.createdAt);
@@ -42,17 +40,14 @@ const DataTable = () => {
     });
   };
 
-  // Render loading state if data is still fetching
   if (isLoading) {
     return <Loader />;
   }
 
-  // Render error message if fetching data resulted in an error
   if (isError) {
     return <p>Error fetching data!</p>;
   }
 
-  // Filter and sort the data based on search term and sorting criteria
   let filteredData = [];
 
   if (data) {
@@ -64,35 +59,40 @@ const DataTable = () => {
       );
     }
 
-    // Sort filtered data based on selected sort order
     filteredData = sortData(filteredData);
   }
 
-  // Get current rows based on pagination
+  const rowsByDate = currentDate
+    ? filteredData.filter(
+        (item) => moment(item.createdAt).format("YYYY-MM-DD") === currentDate
+      )
+    : filteredData;
+
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = rowsByDate.slice(indexOfFirstRow, indexOfLastRow);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Handle previous button click
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  // Handle next button click
   const handleNext = () => {
-    if (currentPage < Math.ceil(filteredData.length / rowsPerPage)) {
+    if (currentPage < Math.ceil(rowsByDate.length / rowsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // Function to handle sorting order change
   const handleSortChange = (e) => {
     setSortOrder(e.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setCurrentDate(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
@@ -121,6 +121,14 @@ const DataTable = () => {
                 </Form.Control>
               </Form.Group>
             </div>
+            <Form.Group controlId="dateField">
+              <Form.Label>Select Date: </Form.Label>
+              <Form.Control
+                type="date"
+                value={currentDate}
+                onChange={handleDateChange}
+              />
+            </Form.Group>
           </div>
           <div className="table-responsive">
             <Table striped bordered hover>
@@ -164,8 +172,12 @@ const DataTable = () => {
                         <td>{consultant}</td>
                         <td>
                           {platform}{" "}
-                          {callMethod === "incoming" && <FiPhoneIncoming className="text-danger"/>}
-                          {callMethod === "outgoing" && <FiPhoneOutgoing className="text-primary"/>}
+                          {callMethod === "incoming" && (
+                            <FiPhoneIncoming className="text-danger" />
+                          )}
+                          {callMethod === "outgoing" && (
+                            <FiPhoneOutgoing className="text-primary" />
+                          )}
                         </td>
                         <td>
                           {moment(createdAt).format("MMM Do YY ,h:mm:ss a")}
@@ -176,7 +188,7 @@ const DataTable = () => {
                   )
                 ) : (
                   <tr>
-                    <td colSpan="6" className="text-center">
+                    <td colSpan="7" className="text-center">
                       No data found
                     </td>
                   </tr>
@@ -190,7 +202,7 @@ const DataTable = () => {
                   disabled={currentPage === 1}
                 />
                 {Array.from(
-                  { length: Math.ceil(filteredData.length / rowsPerPage) },
+                  { length: Math.ceil(rowsByDate.length / rowsPerPage) },
                   (_, index) => (
                     <Pagination.Item
                       key={index + 1}
@@ -204,7 +216,7 @@ const DataTable = () => {
                 <Pagination.Next
                   onClick={handleNext}
                   disabled={
-                    currentPage === Math.ceil(filteredData.length / rowsPerPage)
+                    currentPage === Math.ceil(rowsByDate.length / rowsPerPage)
                   }
                 />
               </Pagination>

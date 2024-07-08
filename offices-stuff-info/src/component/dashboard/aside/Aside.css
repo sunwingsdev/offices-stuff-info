@@ -108,7 +108,7 @@
     display: block;
     position: fixed;
     top: 20px;
-    right: 20px;
+    left: 20px;
     background: none;
     border: none;
     color: #ffffff;
@@ -135,6 +135,6 @@
 
   .DBText,
   .dashboardLogoImg {
-    display: none;
+    width: 70;
   }
 }
