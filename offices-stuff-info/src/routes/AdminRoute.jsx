@@ -6,10 +6,10 @@ import { useGetSingleUserQuery } from "../redux/features/allApis/usersApi/usersA
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const { data: loggedUser } = useGetSingleUserQuery(user?.uid);
+  const { data: loggedUser, isLoading } = useGetSingleUserQuery(user?.uid);
   const location = useLocation();
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Loader />;
   }
 
