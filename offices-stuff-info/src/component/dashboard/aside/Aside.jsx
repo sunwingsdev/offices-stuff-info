@@ -51,8 +51,12 @@ const Aside = () => {
   }
   return (
     <div className="aside-container">
-      <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-        {mobileMenuVisible ? <FaTimes /> : <FaBars />}
+      <button className="mobile-menu-toggle " onClick={toggleMobileMenu}>
+        {mobileMenuVisible ? (
+          <FaTimes className={`${mobileMenuVisible && "closeButton"}`} />
+        ) : (
+          <FaBars />
+        )}
       </button>
       <div
         className={`aside ${mobileMenuVisible ? "mobile-menu-visible" : ""}`}
@@ -76,7 +80,9 @@ const Aside = () => {
           {loggedUser?.role === "admin" && (
             <NavLink
               to="/dashboard/users"
-              className={() => (isActive("/dashboard/users") ? "tabActive" : "")}
+              className={() =>
+                isActive("/dashboard/users") ? "tabActive" : ""
+              }
             >
               <li>
                 <FaUser />
@@ -98,7 +104,9 @@ const Aside = () => {
           {loggedUser?.role === "admin" && (
             <NavLink
               to="/dashboard/headline"
-              className={() => (isActive("/dashboard/headline") ? "tabActive" : "")}
+              className={() =>
+                isActive("/dashboard/headline") ? "tabActive" : ""
+              }
             >
               <li>Headline</li>
             </NavLink>
@@ -106,27 +114,35 @@ const Aside = () => {
           {loggedUser?.role === "admin" && (
             <NavLink
               to="/dashboard/edit-home"
-              className={() => (isActive("/dashboard/edit-home") ? "tabActive" : "")}
+              className={() =>
+                isActive("/dashboard/edit-home") ? "tabActive" : ""
+              }
             >
               <li>Edit Home</li>
             </NavLink>
           )}
           <NavLink
             to="/dashboard/data-input"
-            className={() => (isActive("/dashboard/data-input") ? "tabActive" : "")}
+            className={() =>
+              isActive("/dashboard/data-input") ? "tabActive" : ""
+            }
           >
             <li>Data Input</li>
           </NavLink>
           <NavLink
             to="/dashboard/my-data-table"
-            className={() => (isActive("/dashboard/my-data-table") ? "tabActive" : "")}
+            className={() =>
+              isActive("/dashboard/my-data-table") ? "tabActive" : ""
+            }
           >
             <li>My Data Table</li>
           </NavLink>
           {loggedUser?.role === "admin" && (
             <NavLink
               to="/dashboard/data-table"
-              className={() => (isActive("/dashboard/data-table") ? "tabActive" : "")}
+              className={() =>
+                isActive("/dashboard/data-table") ? "tabActive" : ""
+              }
             >
               <li>Data Table</li>
             </NavLink>
