@@ -30,6 +30,9 @@
   font-size: 1.2rem;
   font-weight: 500;
 }
+.upload-placeholder p {
+  line-height: 26px;
+}
 
 .image-preview {
   position: relative;
@@ -62,4 +65,20 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+}
+.uploadButton {
+  max-width: 200px;
+  margin: auto;
+}
+@media (max-width: 991px) {
+}
+@media (max-width: 576px) {
+  .upload-container {
+    width: 80%;
+  }
+}
+@media (max-width: 450px) {
+  .upload-container {
+    width: 90%;
+  }
 }

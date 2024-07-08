@@ -133,7 +133,7 @@ const LogoDashboard = () => {
             )}
           </div>
         </Form.Group>
-        <Form.Group className="form-group text-center">
+        <Form.Group className="form-group text-center uploadButton">
           <Button
             disabled={loading}
             type="submit"
